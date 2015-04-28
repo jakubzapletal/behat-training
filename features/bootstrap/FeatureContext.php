@@ -9,6 +9,7 @@ use Behat\Gherkin\Node\TableNode;
 use Behat\Behat\Tester\Exception\PendingException;
 use Training\Queue\InMemoryQueue;
 use Training\UpdateProcessor;
+use Training\EventProcessor;
 
 
 /**
@@ -22,6 +23,9 @@ class FeatureContext implements Context, SnippetAcceptingContext
     /** @var \Training\Queue\InMemoryQueue */
     private $producerQueue;
     
+    /** @var \Training\EventProcessor */
+    private $eventProcessor;
+    
     /**
      * Initializes context.
      *
@@ -33,6 +37,7 @@ class FeatureContext implements Context, SnippetAcceptingContext
     {
         $this->consumerQueue = new InMemoryQueue;
         $this->producerQueue = new InMemoryQueue;
+        $this->eventProcessor = new EventProcessor;
     }
     
     /**
@@ -55,7 +60,7 @@ class FeatureContext implements Context, SnippetAcceptingContext
      */
     public function iRunProcessingAnUpdate()
     {
-        $processor = new UpdateProcessor($this->consumerQueue, $this->producerQueue);
+        $processor = new UpdateProcessor($this->consumerQueue, $this->producerQueue, $this->eventProcessor);
         $processor->process();
     }
 
