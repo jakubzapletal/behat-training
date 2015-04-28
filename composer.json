@@ -15,8 +15,14 @@
             "Training\\": "src/"
         }
     },
+    "autoload-dev": {
+        "psr-4": {
+            "Training\\Behat\\": "features/bootstrap/"
+        }
+    },
     "require-dev": {
         "behat/behat": "~3.0",
-        "phpspec/phpspec": "~2.2"
+        "phpspec/phpspec": "~2.2",
+        "bossa/phpspec2-expect": "~1.0"
     }
 }
