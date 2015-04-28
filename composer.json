@@ -1,0 +1,21 @@
+{
+    "name": "root/behat-training",
+    "authors": [
+        {
+            "name": "Jakub Zapletal",
+            "email": "zapletal.jakub@gmail.com"
+        }
+    ],
+    "require": {
+        "symfony/console": "~2.6",
+        "symfony/dependency-injection": "~2.6"
+    },
+    "autoload": {
+        "psr-4": {
+            "Training\\": "src/"
+        }
+    },
+    "require-dev": {
+        "behat/behat": "~3.0"
+    }
+}
