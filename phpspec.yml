@@ -1,0 +1,5 @@
+suites:
+    main:
+        namespace: Training
+        psr4_prefix: Training
+        src_path: src/
