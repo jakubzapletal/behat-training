@@ -1,1 +1,20 @@
 services:
+
+    queue.consumer:
+        class: Training\Queue\InMemoryQueue
+
+    queue.producer:
+            class: Training\Queue\InMemoryQueue
+
+    update.command:
+        class: Training\Console\Command\UpdateCommand
+        arguments:
+            - update
+            - @update.processor
+
+    update.processor:
+        class: Training\UpdateProcessor
+        arguments:
+            - @queue.consumer
+            - @queue.producer
+

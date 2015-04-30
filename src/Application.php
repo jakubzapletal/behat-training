@@ -21,4 +21,12 @@ class Application extends BaseApplication
 
         parent::__construct();
     }
+
+    /**
+     * @return ContainerBuilder
+     */
+    public function getDic()
+    {
+        return $this->container;
+    }
 }

@@ -1,4 +1,10 @@
 default:
     suites:
         domain:
-            contexts: [Training\Behat\FeatureContext]
+            contexts: [Training\Behat\DomainContext, Training\Behat\CommonContext]
+            filters:
+                tags: @domain
+        application:
+            contexts: [Training\Behat\ApplicationContext, Training\Behat\CommonContext]
+            filters:
+                tags: @application
