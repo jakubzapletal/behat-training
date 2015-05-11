@@ -1,0 +1,6 @@
+default:
+    suites:
+        domain:
+            contexts: [Training\DomainContext, Training\CommonContext]
+            filters:
+                tags: "@domain"
