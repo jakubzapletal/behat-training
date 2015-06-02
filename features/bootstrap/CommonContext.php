@@ -7,6 +7,7 @@ use Behat\Behat\Context\SnippetAcceptingContext;
 use Behat\Gherkin\Node\PyStringNode;
 use Behat\Gherkin\Node\TableNode;
 use Behat\Behat\Tester\Exception\PendingException;
+use Training\Account;
 
 /**
  * Defines application features from the specific context.
@@ -18,6 +19,19 @@ class CommonContext implements Context, SnippetAcceptingContext
 
     /** @var \Training\ATM */
     public $atm;
+
+    public function __construct()
+    {
+        $this->account = new Account();
+    }
+
+    /**
+     * @Given there is an account with :balance pounds
+     */
+    public function thereIsAnAccountWithPounds($balance)
+    {
+        $this->account->setBalance($balance);
+    }
 
     /**
      * @Then the account should have :amount pounds

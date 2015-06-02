@@ -48,20 +48,10 @@ class ApplicationContext implements Context, SnippetAcceptingContext
     {
         $environment = $scope->getEnvironment();
         $this->commonContext = $environment->getContext('Training\Behat\CommonContext');
-    }
 
-    /**
-     * @Given there is an account with :balance pounds
-     */
-    public function thereIsAnAccountWithPounds($balance)
-    {
-        $account = new \Training\Account;
-        $account->setBalance($balance);
-
+        // set session
         $session = $this->dic->get('session');
-        $session->setAccount($account);
-
-        $this->commonContext->account = $account;
+        $session->setAccount($this->commonContext->account);
     }
 
     /**

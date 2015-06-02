@@ -8,6 +8,9 @@ use Behat\Gherkin\Node\PyStringNode;
 use Behat\Gherkin\Node\TableNode;
 use Behat\Behat\Tester\Exception\PendingException;
 use Behat\Behat\Hook\Scope\BeforeScenarioScope;
+use Training\ATM;
+use Training\CashStorage\InMemoryCashStorage;
+use Training\WithdrawManager;
 
 /**
  * Defines application features from the specific context.
@@ -31,25 +34,14 @@ class DomainContext implements Context, SnippetAcceptingContext
     }
 
     /**
-     * @Given there is an account with :balance pounds
-     */
-    public function thereIsAnAccountWithPounds($balance)
-    {
-        $account = new \Training\Account;
-        $account->setBalance($balance);
-
-        $this->commonContext->account = $account;
-    }
-
-    /**
      * @Given there is an ATM with :amount pounds
      */
     public function thereIsAnAtmWithPounds($amount)
     {
-        $cashStorage = new \Training\CashStorage\InMemoryCashStorage;
+        $cashStorage = new InMemoryCashStorage();
         $cashStorage->setCash($amount);
 
-        $atm = new \Training\ATM($cashStorage);
+        $atm = new ATM($cashStorage);
 
         $this->commonContext->atm = $atm;
     }
@@ -59,7 +51,7 @@ class DomainContext implements Context, SnippetAcceptingContext
      */
     public function theAccountHolderTriesToWithdrawPounds($amount)
     {
-        $withdrawManager = new \Training\WithdrawManager($this->commonContext->atm);
+        $withdrawManager = new WithdrawManager($this->commonContext->atm);
         $this->result = $withdrawManager->withdraw($this->commonContext->account, $amount);
     }
 
