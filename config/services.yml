@@ -1,1 +1,16 @@
 services:
+
+    session:
+        class: Training\Session
+
+    atm:
+        class: Training\ATM
+        arguments: [@cash_storage]
+
+    command.withdraw:
+        class: Training\Command\WithdrawCommand
+        arguments: ['withdraw', @withdraw_manager, @session]
+
+    withdraw_manager:
+        class: Training\WithdrawManager
+        arguments: [@atm]

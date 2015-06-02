@@ -2,17 +2,16 @@
 
 namespace Training;
 
+use Training\CashStorage\CashStorage;
+
 class ATM
 {
-    /** @var int */
-    private $cash;
+    /** @var CashStorage */
+    private $cashStorage;
 
-    /**
-     * @param int $cash
-     */
-    public function setCash($cash)
+    public function __construct(CashStorage $cashStorage)
     {
-        $this->cash = $cash;
+        $this->cashStorage = $cashStorage;
     }
 
     /**
@@ -20,7 +19,7 @@ class ATM
      */
     public function getCash()
     {
-        return $this->cash;
+        return $this->cashStorage->getCash();
     }
 
     /**
@@ -28,6 +27,8 @@ class ATM
      */
     public function drain($amount)
     {
-        $this->cash -= $amount;
+        $cash = $this->cashStorage->getCash();
+        $cash -= $amount;
+        $this->cashStorage->setCash($cash);
     }
 }
